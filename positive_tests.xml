@@ -1,0 +1,28 @@
+<suite name="Amazon positive tests">
+    <test name="Amazon tests">
+        <classes>
+            <class name="tests.AuthenticationTests">
+                <methods>
+                    <include name="checkUserCanBeRedirectedToAmazonRegistrationPageFromSigInForm"/>
+                </methods>
+            </class>
+            <class name="tests.CartFunctionalityTests">
+                <methods>
+                    <include name="checkAddItemToCart"/>
+                    <include name="checkDeleteItemFromCart"/>
+                    <include name="checkPossibilityToAddToCartFromCategoriesList"/>
+                </methods>
+            </class>
+            <class name="tests.DeliveryConfigurationTests">
+                <methods>
+                    <include name="checkDeliveryConfigurationByUsZipCode"/>
+                </methods>
+            </class>
+            <class name="tests.SearchResultTests">
+                <methods>
+                    <include name="checkSearchResultPageContainsSearchedItems"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

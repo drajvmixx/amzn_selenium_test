@@ -1,0 +1,18 @@
+<suite name="Amazon negative tests">
+    <test name="Amazon tests">
+        <classes>
+            <class name="tests.AuthenticationTests">
+                <methods>
+                    <include name="checkErrorMessageIfSignInWithEmptyField"/>
+                    <include name="checkImpossibilitySignUpAsSellerWithWrongCredentials"/>
+                </methods>
+            </class>
+            <class name="tests.OrderFunctionalityTests">
+                <methods>
+                    <include name="checkImpossibilityToMakeOrderWithoutSignIn"/>
+                    <include name="checkImpossibilityOfOrderingMoreThanThreeItemsWithoutBusinessAccount"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
