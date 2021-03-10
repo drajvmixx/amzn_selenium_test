@@ -17,7 +17,7 @@ public class AuthenticationTests extends BaseTest {
     public static final String PASSWORD_FIELD_INPUT = "Qwfdghhgderty123";
     public static final String ERROR_MESSAGE_WRONG_SIGNUP_CREDENTIALS = "To better protect your account, please re-enter your password and then enter the characters as they are shown in the image below";
 
-    @Test
+    @Test(description = "Check Error Message If Sign In With Empty Field. TC_ID=C1")
     public void checkErrorMessageIfSignInWithEmptyField() {
         getSignInLayer().signInWithEmptyField();
         assertEquals(getSignInLayer().getErrorMessageOfEmptySignInField(), ERROR_MESSAGE_OF_EMPTY_SIGN_IN_FIELD);

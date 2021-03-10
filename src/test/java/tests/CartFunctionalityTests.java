@@ -13,7 +13,7 @@ public class CartFunctionalityTests extends BaseTest {
     public static final String ITEMS_AMOUNT_AT_CART = "1";
     public static final String CART_IS_EMPTY_KEYWORD = "Cart is empty";
 
-    @Test
+    /*@Test
     public void checkAddItemToCart() {
         getCartLayer().addToCartItem();
         assertEquals(getCartLayer().getItemsAmountAtCart(), ITEMS_AMOUNT_AT_CART);
@@ -23,7 +23,7 @@ public class CartFunctionalityTests extends BaseTest {
     public void checkDeleteItemFromCart() {
         getCartLayer().addToCartAndDelete();
         assertTrue(getCartLayer().getNotificationAboutEmptyCart().contains(CART_IS_EMPTY_KEYWORD));
-    }
+    }*/
 
     /*@Test
     public void checkPossibilityToAddToCartFromCategoriesList() {

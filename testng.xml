@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="My test suite">
     <listeners>
-        <listener class-name="config.SlackTestsReporter"/>
+        <listener class-name="config.TestsReporter"/>
     </listeners>
     <test name="numbersXML">
         <parameter name="value" value="1"/>
