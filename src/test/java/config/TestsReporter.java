@@ -3,7 +3,6 @@ package config;
 import com.gurock.testrail.APIClient;
 import com.gurock.testrail.APIException;
 import okhttp3.*;
-import org.json.simple.JSONObject;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestNGMethod;
@@ -16,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class TestsReporter implements ITestListener {
 
-    private static final String HOOK_URL = "https://hooks.slack.com/services/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";
+    private static final String SLACK_HOOK_URL = "https://hooks.slack.com/services/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";
     private static final APIClient client = new APIClient("https://irynaep.testrail.io/");
     private static int TEST_RAIL_PASSED_STATUS = 1;
     private static int TEST_RAIL_FAILED_STATUS = 5;
@@ -36,16 +35,16 @@ public class TestsReporter implements ITestListener {
 
         testContext.getFailedTests().getAllResults()
                 .stream()
-                .map(ITestResult::getMethod)
-                .map(ITestNGMethod::getDescription)
-                .filter(Objects::nonNull)
+                .map(res -> res.getMethod())
+                .map(m -> m.getDescription())
+                .filter(testName -> Objects.nonNull(testName))
                 .forEach(testName -> sendToTestRail(testName, TEST_RAIL_FAILED_STATUS));
 
         testContext.getPassedTests().getAllResults()
                 .stream()
-                .map(ITestResult::getMethod)
-                .map(ITestNGMethod::getDescription)
-                .filter(Objects::nonNull)
+                .map(res -> res.getMethod())
+                .map(m -> m.getDescription())
+                .filter(testName -> Objects.nonNull(testName))
                 .forEach(testName -> sendToTestRail(testName, TEST_RAIL_PASSED_STATUS));
 
     }
@@ -55,7 +54,7 @@ public class TestsReporter implements ITestListener {
         if (parsedTestName.length > 1) {
             String testCaseId = parsedTestName[1];
 
-            Map<String, Object> body = new HashMap<>();
+            Map<String, Integer> body = new HashMap<>();
             body.put("status_id", status);
 
             try {
@@ -68,20 +67,12 @@ public class TestsReporter implements ITestListener {
     }
 
     private void prepareSlackReport(ITestContext testContext) {
-        StringBuilder report = new StringBuilder();
-        report.append("failed:\n");
+        StringBuilder report = new StringBuilder("Failed:\n");
 
-        String result = testContext.getFailedTests().getAllResults()
+        String result = testContext.getFailedTests()
+                .getAllResults()
                 .stream()
-                .map(ITestResult::getName)
-                .collect(Collectors.joining("; \n"));
-
-        report.append(result);
-        report.append("\n\npassed:\n");
-
-        result = testContext.getPassedTests().getAllResults()
-                .stream()
-                .map(ITestResult::getName)
+                .map(res -> res.getName())
                 .collect(Collectors.joining("; \n"));
 
         report.append(result);
@@ -93,7 +84,7 @@ public class TestsReporter implements ITestListener {
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody body = RequestBody.create(mediaType, "{\"text\": \"" + data + "\"}");
         Request request = new Request.Builder()
-                .url(HOOK_URL)
+                .url(SLACK_HOOK_URL)
                 .method("POST", body)
                 .addHeader("Content-Type", "application/json")
                 .build();
