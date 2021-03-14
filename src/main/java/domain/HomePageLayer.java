@@ -1,15 +1,14 @@
 package domain;
 
+import pages.BasePage;
 import utils.WaitAdapter;
-
-import static pages.BasePage.DEFAULT_TIMEOUT;
 
 public class HomePageLayer extends BaseLayer {
 
     public void goToRegistrationPage() {
         getHomePage().clickOnSignInLink();
         getHomePage().clickOnCreateNewAccountButton();
-        WaitAdapter.get().waitForPageLoadComplete(DEFAULT_TIMEOUT);
+        WaitAdapter.get().waitForPageLoadComplete(BasePage.DEFAULT_TIMEOUT);
     }
 
     public void editZipCodeInDeliveryConfiguration(String zipCode) {

@@ -1,7 +1,5 @@
 package domain;
 
-import java.nio.charset.Charset;
-
 public class CartLayer extends BaseLayer {
     public void addToCartItem() {
         getHomePage().clickOnGiftCardsLink();

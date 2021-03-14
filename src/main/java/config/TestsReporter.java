@@ -5,7 +5,6 @@ import com.gurock.testrail.APIException;
 import okhttp3.*;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
-import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
 import java.io.IOException;
 import java.util.HashMap;
